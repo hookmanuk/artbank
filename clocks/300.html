@@ -1,0 +1,113 @@
+<html style="height:100%;">
+<head>
+</head>
+<body style="margin:0;height:100%;">
+    <canvas style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 491px; height: 491px;" id="canvas" width="491" height="491"></canvas>
+    <script type="text/javascript">
+    canvas = document.createElement('canvas'); let b = document.body; let s = (b.clientWidth < b.clientHeight ? b.clientWidth : b.clientHeight); let ratio = s / 550; canvas.width = 550 * ratio; canvas.height = 550 * ratio; canvas.style.width = '100vw'; canvas.style.height = '100vh'; canvas.getContext('2d').scale(2 * ratio, 2 * ratio);
+
+    function refresh() {
+        var c = canvas;
+        var ctx = c.getContext("2d");
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        ctx.beginPath();
+        var grd = ctx.createLinearGradient(0, 0, Math.floor(Math.random() * 550), Math.floor(Math.random() * 550));
+        grd.addColorStop(Math.random(), "#f50c0c");
+        grd.addColorStop(Math.random(), "#ef5c0c");
+        grd.addColorStop(Math.random(), "#eb7c08");
+        grd.addColorStop(Math.random(), "#edb404");
+        grd.addColorStop(Math.random(), "#ffdc77");
+
+
+        ctx.fillStyle = grd;
+        ctx.fillRect(0, 0, 550, 550);
+
+
+        var cxt = c.getContext("2d");
+        var centerX = Math.floor(Math.random() * 200);
+        var centerY = Math.floor(Math.random() * 350);
+        cxt.moveTo(centerX, centerY);
+
+
+        var gap = Math.floor(Math.random() * 1) + .005; // increase this for spacing between spiral lines also bigger smaller
+        var STEPS_PER_ROTATION = Math.floor(Math.random() * 500) + 1; // increasing this makes the curve smoother
+
+        var increment = Math.floor(Math.random() * 400) + .01 * Math.PI / STEPS_PER_ROTATION;//lower=darker
+        var theta = increment;
+        while (theta < Math.floor(Math.random() * 150) + 35000) {//bigger or smaller
+            var newX = centerX + theta * Math.cos(theta) * gap;
+            var newY = centerY + theta * Math.sin(theta) * gap;
+            cxt.lineTo(newX, newY);
+            theta = theta + increment;
+        }
+        ctx.strokeStyle = "#000000";
+        ctx.lineWidth = .5;
+        ctx.stroke(); // draw
+
+        setInterval(function () {
+            currenthours = new Date().getHours();
+            if (lasthours != currenthours) {
+                lasthours = currenthours;
+                refresh();
+            }
+        }, 1000);
+    }
+
+    var lasthours = new Date().getHours();
+    var currenthours = lasthours;
+    refresh();
+    </script>
+    <script>
+var backc = '#0000', bW, bX, bF, bY, si;var cvs;function main(){cvs = document.querySelector("#canvas");var webGL = document.createElement("canvas");const b = document.body;var ctx = cvs.getContext("2d");const gl = webGL.getContext("webgl");;let requestId;function rf(){if(!requestId){requestId = requestAnimationFrame(render);}}function cf(){if(requestId){cancelAnimationFrame(requestId);requestId = undefined;}}setInterval(rf, 10);let then = 0;let time = 0;function rc() { var r = cvs.width * 0.9 / 2;var o = cvs.width * 0.05;ctx.translate(r+o, r+o);ctx.beginPath();ctx.arc(0, 0, r, 0, 2 * Math.PI);ctx.fillStyle = '#000';ctx.shadowColor = "#000A";ctx.shadowBlur = 6;ctx.shadowOffsetX = -3;ctx.shadowOffsetY = 6;ctx.fill();ctx.translate(-r-o, -r-o);ctx.strokeStyle=backc;ctx.fillStyle= backc;ctx.fillRect(0, 0, (r + o) * 2, (r + o) * 2);ctx.beginPath();ctx.arc(r + o, r + o, r, 0, Math.PI * 2, true);ctx.clip();
+ctx.save();
+
+ctx.drawImage(canvas, o, o, r*2, r*2);
+
+var t = new Date();
+var a = t.getHours() % 12 * 30 + .5 * t.getMinutes() - 90;
+ctx.translate(r + o, r + o);
+ctx.rotate(a * Math.PI / 180);
+ctx.beginPath();
+
+ctx.arc(0, 0, r*0.96, 1.91 * Math.PI, .09 * Math.PI);
+ctx.lineTo(0, 0);
+ctx.rotate(-a * Math.PI / 180);
+ctx.translate(-r - o, -r - o);
+ctx.fillStyle = '#FFF';
+ctx.fill();
+ctx.clip();
+
+o+=r*0.1;
+r*=0.9;
+
+ctx.translate(r+o,r+o);var ang;var num;ctx.font=r*0.15+'px arial';ctx.textBaseline='middle';ctx.textAlign='center';ctx.fillStyle='#000';ctx.font=ctx.font=r*0.16+'px sans-serif';for(num=1;num<13;num++){ang=num*Math.PI/6;ctx.rotate(ang);ctx.translate(0,-r*0.87);var width=(num>=10?0.16:0.11);ctx.rotate(-ang);ctx.fillText(num,0,0,r*width);ctx.rotate(ang);ctx.translate(0,r*0.87);ctx.rotate(-ang)}
+ctx.translate(-r-o,-r-o)
+
+r/=0.9;
+o-=r*0.1;
+
+ctx.restore();
+ctx.save();
+
+var t = new Date();
+var a = t.getHours() % 12 * 30 + .5 * t.getMinutes() - 90;
+ctx.translate(r+o, r+o);
+ctx.rotate(a * Math.PI / 180);
+ctx.beginPath();
+ctx.arc(0, 0, r, .09 * Math.PI, 1.91 * Math.PI);
+ctx.lineTo(0, 0);
+ctx.rotate(-a * Math.PI / 180);
+ctx.translate(-r -o, -r -o);
+ctx.clip();
+
+ctx.restore();
+
+bW = r / 8, bX = -r / 1.95, bF = 0, bY = -r / 1.8; if (ov || si) { upCt(ctx, r, o); }
+function drawHand(t,n,o,a,e,r,h){t.strokeStyle=r??'#EEE',t.lineCap="round";var s=2*Math.PI*n-Math.PI/2,u=Math.PI-s-90*Math.PI/180,d=o*Math.sin(u)/Math.sin(90*Math.PI/180),i=o*Math.sin(s)/Math.sin(90*Math.PI/180);t.beginPath(),t.moveTo(.1*-d,.1*-i),t.lineWidth=a*h,t.lineTo(d,i),t.stroke()}ctx.translate(r+o,r+o);var now=new Date,hour=now.getHours(),minute=now.getMinutes(),second=now.getSeconds();hour=(hour%=12)+minute/60+second/3600,hour/=12;var ang=now.getHours()%12*30+.5*now.getMinutes()-90;ctx.shadowBlur=5,ctx.shadowColor="#22222233",ctx.shadowOffsetX=-4,ctx.shadowOffsetY=3,minute+=second/60,minute/=60,drawHand(ctx,minute,.65*r,.02*r,0,null,2),second/=60;ctx.beginPath();ctx.fillStyle='#EEE';ctx.arc(0,0,0.05*r,0,2*Math.PI);ctx.fill();drawHand(ctx,second,.75*r,.02*r,0,"red",1);ctx.beginPath();ctx.fillStyle='red';ctx.arc(0,0,0.03*r,0,2*Math.PI);ctx.fill();
+}
+function render(now) {var s = (b.clientWidth < b.clientHeight ? b.clientWidth : b.clientHeight);cvs.style.width = s;cvs.style.height = s;cvs.width = s;cvs.height = s;webGL.width = s * 2;webGL.height = s * 2;requestId = undefined;now *= 0.001;const elapsedTime = Math.min(now - then, 0.1);time += elapsedTime;then = now;
+
+rf();rc();}rf();requestAnimationFrame(cf);}main();upCt = (ctx, r, o, a) => {
+ctx.save();ctx.beginPath();ctx.translate(r + o, r + o);ctx.font = 'bold ' + r / 15 + 'px sans-serif';ctx.textAlign = 'center';ctx.textBaseline = 'middle';ctx.strokeStyle = '#EEE';ctx.lineWidth = 5 * r / 500;ctx.lineJoin = 'round';var now = new Date();ctx.shadowColor = '#00000000';ctx.rect(bX-bW*0.4,bY,bW*9,bW*2);;ctx.stroke();ctx.fillStyle = '#EEE';ctx.fillText(now.toUTCString().toUpperCase().replace(' GMT', '') + ' UTC', 0, bY + bW * 0.6);var epoch = new Date('01 Mar 2022 21:45 UTC'); var diff = now - epoch; var ms = 432000000 - diff % 432000000; var secs = ms / 1000; var mins = secs / 60; var hours = mins / 60; var days = hours / 24;ctx.fillText('EPOCH ENDS IN ' + Math.floor(days) + 'D ' + Math.floor((days - Math.floor(days)) * 24) + 'H ' + Math.floor((hours - Math.floor(hours)) * 60) + 'M ' + Math.ceil((mins - Math.floor(mins)) * 60) + 'S', 0, bY + bW * 1.5);ctx.translate(-r - o, -r - o);ctx.restore(); }; ov = 0; MDN = () => { ov = 1; }; MUP = () => { ov = 0; }; l = [['touchstart', e => { MDN() }],['mousedown', e => { MDN() }], ['mouseup', e => { MUP() }],]; l.forEach(e => cvs.addEventListener(e[0], e[1])); function initnft (args) {if (args?.showinfo) {si = 1;ov = 1;} if (args.background) {backc = args.background;}}</script>
+</body>
+</html>
