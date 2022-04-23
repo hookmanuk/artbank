@@ -3,51 +3,59 @@ body {
 }
 
 .wall {
-    height: 100%;
+    position:relative;
+    height: 56.69vw;
     width: 100%;
+    //min-height: 800px;
+    background-image: url(office-5.png);
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: cover; /* Resize the background image to cover the entire container */
 }
 
 .nft {
     position: absolute;
-    border: none;
-    width: 35%;
-    height: 35%;    
+    border: none;        
 }
 
 .nft1 {
-    left: 0%;
+    left: 10vw;
     top: 30%;
+    width: 20vw;
+    height: 20vw;
 }
 
 .nft2 {
-    left: 65%;
+    left: 68vw;
     top: 30%;
+    width: 20vw;
+    height: 20vw;
 }
 
 .nft3 {
-    left: 28%;
+    left: 34vw;
     top: 20%;
-    width:24%;
-    height:24%;
+    height: 13vw;
+    width: 13vw;
 }
 
 .nft4 {
-    left: 48%;
+    left: 51vw;
     top: 20%;
-    width: 24%;
-    height: 24%;
+    height: 13vw;
+    width: 13vw;
 }
 
 .nft5 {
-    left: 28%;
+    left: 34vw;
     top: 50%;
-    width: 24%;
-    height: 24%;
+    height: 13vw;
+    width: 13vw;
 }
 
 .nft6 {
-    left: 48%;
+    left: 51vw;
     top: 50%;
-    width: 24%;
-    height: 24%;
+    height: 13vw;
+    width: 13vw;
 }
